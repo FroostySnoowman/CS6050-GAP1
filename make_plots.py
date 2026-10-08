@@ -6,7 +6,6 @@ import json
 import math
 import os
 import sys
-
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
@@ -61,11 +60,9 @@ ALGOS = {
     },
 }
 
-
 def read_csv(path):
     with open(path) as f:
         return list(csv.DictReader(f))
-
 
 def style_axes(ax):
     ax.grid(True, which="major", color=GRID, linewidth=0.8)
@@ -78,7 +75,6 @@ def style_axes(ax):
     ax.xaxis.label.set_color(INK)
     ax.yaxis.label.set_color(INK)
 
-
 def seconds_fmt(v, _):
     if v >= 1:
         return f"{v:g} s"
@@ -86,13 +82,11 @@ def seconds_fmt(v, _):
         return f"{v * 1e3:g} ms"
     return f"{v * 1e6:g} µs"
 
-
 def size_fmt(v, _):
     e = math.log10(v)
     if abs(e - round(e)) < 1e-9:
         return f"$10^{{{int(round(e))}}}$"
     return ""
-
 
 def fit(x, t, f):
     xs, ts = x[-N_FIT:], t[-N_FIT:]
@@ -100,7 +94,6 @@ def fit(x, t, f):
     slope = np.polyfit(np.log(xs), np.log(ts), 1)[0]
     f_slope = np.polyfit(np.log(xs), np.log(f(xs)), 1)[0]
     return c, slope, f_slope
-
 
 def label_ref_lines(ax, lines, x, t):
     # call after tight_layout, the angle depends on the axes size
@@ -117,7 +110,6 @@ def label_ref_lines(ax, lines, x, t):
                     textcoords="offset points", fontsize=8, color=INK2,
                     rotation=angle, rotation_mode="anchor", ha="left",
                     va="top" if below else "bottom")
-
 
 def plot_one(name):
     cfg = ALGOS[name]
@@ -225,7 +217,6 @@ def plot_one(name):
           + " ".join(f"{r:.2f}" for r in ratio))
     return out
 
-
 def main():
     names = sys.argv[1:] or list(ALGOS)
     plt.rcParams.update({"font.family": "DejaVu Sans", "svg.fonttype": "path",
@@ -239,7 +230,6 @@ def main():
         fits[name] = plot_one(name)
     with open(fits_path, "w") as fh:
         json.dump(fits, fh, indent=1)
-
 
 if __name__ == "__main__":
     main()
