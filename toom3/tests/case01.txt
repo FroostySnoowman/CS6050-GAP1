@@ -1,0 +1,5 @@
+# toom3 case 1: two random 81-bit operands, seed 1001
+bits 81
+a 11e04edb7f1d5cbf15150
+b 16564c29f12fbc2b9546e
+product 18f4d72dfd68448893763b6065673ab3b332f3060
