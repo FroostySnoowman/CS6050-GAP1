@@ -82,5 +82,5 @@ toom3/  hirschberg/  closest_pair/
     tests/               the 10 test case files
     README.md
 make_plots.py            figures for the write-up
-writeup/                 writeup.pdf, its HTML source, figures, build_pdf.sh
+writeup/                 writeup.pdf and the figures
 ```
